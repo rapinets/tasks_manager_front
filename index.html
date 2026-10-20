@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tasks Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Tasks Manager</h1>
+      <button id="add-project-button" class="header-action" type="button">Додати проєкт</button>
+    </header>
+    <main class="page-content">
+      <div id="api-error" class="api-error" role="alert" aria-live="assertive" hidden></div>
+      <p id="project-status" class="status" role="status">Завантаження...</p>
+      <section id="projects" class="projects" aria-label="Проєкти"></section>
+      <nav class="pagination" aria-label="Пагінація проєктів">
+        <button id="previous-page" type="button" disabled>Назад</button>
+        <button id="next-page" type="button" disabled>Далі</button>
+      </nav>
+    </main>
+
+    <dialog id="task-dialog" class="task-dialog" aria-labelledby="task-dialog-title">
+      <div class="dialog-header">
+        <h2 id="task-dialog-title">Завдання</h2>
+        <button id="close-dialog" class="close-button" type="button" aria-label="Закрити">×</button>
+      </div>
+      <dl id="task-details"></dl>
+      <div class="dialog-actions">
+        <button id="edit-task-button" class="add-task-button" type="button">Редагувати</button>
+      </div>
+    </dialog>
+
+    <dialog id="project-form-dialog" class="task-dialog form-dialog" aria-labelledby="project-form-title">
+      <div class="dialog-header">
+        <h2 id="project-form-title">Новий проєкт</h2>
+        <button class="close-button" type="button" data-close-dialog="project-form-dialog" aria-label="Закрити">×</button>
+      </div>
+      <form id="project-form" novalidate>
+        <label for="project-name-input">Назва</label>
+        <input id="project-name-input" name="name" type="text" maxlength="200" required>
+        <p class="field-error" data-error-for="name" aria-live="polite"></p>
+
+        <label for="project-description-input">Опис</label>
+        <textarea id="project-description-input" name="description" rows="4"></textarea>
+        <p class="field-error" data-error-for="description" aria-live="polite"></p>
+
+        <button class="submit-button" type="submit">Створити проєкт</button>
+      </form>
+    </dialog>
+
+    <dialog id="task-form-dialog" class="task-dialog form-dialog" aria-labelledby="task-form-title">
+      <div class="dialog-header">
+        <h2 id="task-form-title">Нове завдання</h2>
+        <button class="close-button" type="button" data-close-dialog="task-form-dialog" aria-label="Закрити">×</button>
+      </div>
+      <form id="task-form" novalidate>
+        <label for="task-title-input">Назва</label>
+        <input id="task-title-input" name="title" type="text" maxlength="150" required>
+        <p class="field-error" data-error-for="title" aria-live="polite"></p>
+
+        <label for="task-description-input">Опис</label>
+        <textarea id="task-description-input" name="description" rows="4"></textarea>
+        <p class="field-error" data-error-for="description" aria-live="polite"></p>
+
+        <label for="task-priority-input">Пріоритет</label>
+        <select id="task-priority-input" name="priority">
+          <option value="low">Низький</option>
+          <option value="medium" selected>Середній</option>
+          <option value="high">Високий</option>
+        </select>
+        <p class="field-error" data-error-for="priority" aria-live="polite"></p>
+
+        <label for="task-due-date-input">Дата завершення</label>
+        <input id="task-due-date-input" name="due_date" type="date">
+        <p class="field-error" data-error-for="due_date" aria-live="polite"></p>
+
+        <button class="submit-button" type="submit">Створити завдання</button>
+      </form>
+    </dialog>
+  </body>
+</html>
